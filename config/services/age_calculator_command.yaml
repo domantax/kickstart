@@ -1,0 +1,17 @@
+parameters:
+
+services:
+    app.command.age_calculator_command:
+        class: App\Command\AgeCalculatorCommand
+        arguments:
+            $manageAgeResult: '@app.services.manage_age_result'
+        tags:
+            - { name: 'console.command', command: app:age:calculator }
+
+    app.services.manage_age_result:
+        class: App\Services\ManageAgeResult
+        arguments:
+            $ageCalculator: '@app.services.age_calculator'
+
+    app.services.age_calculator:
+        class: App\Services\AgeCalculator

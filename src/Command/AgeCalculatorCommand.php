@@ -2,8 +2,6 @@
 
 namespace App\Command;
 
-use App\Services\AdulthoodChecker;
-use App\Services\AgeCalculator;
 use App\Services\ManageAgeResult;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,19 +14,13 @@ class AgeCalculatorCommand extends Command
 {
     protected static $defaultName = 'app:age:calculator';
 
-    /**
-     * AgeCalculatorCommand constructor.
-     */
     private $manageAgeResult;
-    private $adulthoodChecker;
-
 
     public function __construct(ManageAgeResult $manageAgeResult)
     {
         parent::__construct();
         $this->manageAgeResult = $manageAgeResult;
     }
-
 
     protected function configure()
     {
@@ -48,12 +40,10 @@ class AgeCalculatorCommand extends Command
 
         if ($input->getOption('adult')) {
             if ($this->manageAgeResult->checkIfAdult($birthDate)) {
-                $io->success($this->manageAgeResult->formatAmIAdultResponse($birthDate));
+                $io->success($this->manageAgeResult->formatAdultResponse());
             } else {
-                $io->warning($this->manageAgeResult->formatAmIAdultResponse($birthDate));
+                $io->warning($this->manageAgeResult->formatNotAdultResponse());
             }
         }
-
-
     }
 }

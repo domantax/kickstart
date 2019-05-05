@@ -27,6 +27,7 @@ class AgeCalculator
     {
         $age = $this->currentDate->diff($this->birthDate);
         $this->age = $age;
+
         return $age;
     }
 
@@ -39,6 +40,7 @@ class AgeCalculator
     public function setBirthDate(string $birthDate): AgeCalculator
     {
         $this->birthDate = new \DateTime($birthDate);
+
         return $this;
     }
 }
